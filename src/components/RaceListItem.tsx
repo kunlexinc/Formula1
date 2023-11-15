@@ -67,7 +67,7 @@ export default function RaceListItem({item}: {item:(typeof races)[0]}){
     },
     country: {
       fontSize: 20,
-      fontFamily: 'F1-Bold',
+      fontFamily: 'F1-Black',
       marginVertical: 7,
     },
     description: {
