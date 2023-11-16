@@ -5,12 +5,16 @@ import {Entypo} from '@expo/vector-icons';
 import { Colors } from './src/Constants/Colors';
 import RaceListItem from './src/components/RaceListItem';
 import { useFonts } from 'expo-font';
-
+import dayjs  from 'dayjs';
 
 
 const races = racesResponse.data.races.response
 
 export default function App() {
+
+  const sortedRaces = races.sort((r1,r2) =>
+  dayjs(r2.date).diff(dayjs(r1.date))
+  );
 
   const [fontsLoaded] = useFonts({
     'F1-Black': require('./assets/fonts/Formula1-Black.ttf'),
@@ -28,9 +32,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
     
-    <FlatList data={races} 
-    renderItem={({item}) => (
-     <RaceListItem item={item}/>
+    <FlatList data={sortedRaces} 
+    renderItem={({item, index}) => (
+     <RaceListItem item={item} round={sortedRaces.length - index}/>
 
     )}  />
       
