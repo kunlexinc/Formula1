@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, SafeAreaView,Platform } from 'react-native';
+import { StyleSheet, Text, Pressable, View, FlatList, SafeAreaView,Platform } from 'react-native';
+import {Link} from 'expo-router'
 import racesResponse from '../../assets/data/races.json'
 import {Entypo} from '@expo/vector-icons'
 import { Colors } from '../Constants/Colors'
@@ -10,7 +11,8 @@ const races = racesResponse.data.races.response
 
 export default function RaceListItem({item,round}:{item:(typeof races)[0], round: number}){ 
     return(
-      <View style={styles.itemContainer}>
+     <Link href={'/race'} asChild>
+     <Pressable style={styles.itemContainer}>
         <View style={styles.datesContainer}>
         <Text style={styles.date}>{dayjs(item.date).subtract(2,'days').format('MMM')}-{dayjs(item.date).format('DD')}</Text>
         <Text style={styles.month}>{dayjs(item.date).format('MMM')}</Text>
@@ -23,7 +25,8 @@ export default function RaceListItem({item,round}:{item:(typeof races)[0], round
        
         </View>
         <Entypo name="chevron-right" size={24} color={Colors.primary}/>
-      </View>
+      </Pressable>
+      </Link>
   
   )}
 
